@@ -1,12 +1,16 @@
 package com.cp.payroll;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class EmployeePayrollService {
 	
+	public enum IOService {
+		CONSOLE_IO, FILE_IO, DB_IO, REST_IO
+	}
+	
 	private List<EmployeePayrollData> employeePayrollList;
+	
 
 	public EmployeePayrollService() {
 	}
@@ -27,15 +31,18 @@ public class EmployeePayrollService {
 		employeePayrollList.add(new EmployeePayrollData(id, name, salary));
 	}
 
-	private void writeEmployeePayrollData() {
-		System.out.println("\n Writing Employee Payroll Data to Console\n" + employeePayrollList);
+	public void writeEmployeePayrollData(IOService ioService) {
+		if (ioService.equals(IOService.CONSOLE_IO))
+			System.out.println("\nWriting Payroll to Console\n" + employeePayrollList);
+		else if (ioService.equals(IOService.FILE_IO))
+			new EmployeePayrollFileIOService().writeData(employeePayrollList);
+
+    }
+
+    public long countEntries(IOService ioService) {
+		if (ioService.equals(IOService.FILE_IO))
+			return new EmployeePayrollFileIOService().countEntries();
+		return 0;
 	}
 	
-	public static void main(String[] args) {
-		List<EmployeePayrollData> employeePayrollList = new ArrayList<>();
-		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
-		Scanner sc = new Scanner(System.in);
-		employeePayrollService.readEmployeePayrollData(sc);
-		employeePayrollService.writeEmployeePayrollData();
-	}
 }
