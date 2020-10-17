@@ -10,7 +10,7 @@ public class EmployeePayrollServiceTest {
 			EmployeePayrollData[] arrayOfEmployees = { 
 					new EmployeePayrollData(1, "Aakash Gandhi", 5000.0),
 					new EmployeePayrollData(2, "sumit pandey", 4800.0),
-					new EmployeePayrollData(3, "Dhanraj Bansal", 6500.0) };
+					new EmployeePayrollData(3, "Dhanaraj Bansal", 6500.0) };
 			EmployeePayrollService employeePayrollService; 
 			employeePayrollService = new EmployeePayrollService(Arrays.asList(arrayOfEmployees));
 			employeePayrollService.printEmployeePayrollData(EmployeePayrollService.IOService.FILE_IO);
